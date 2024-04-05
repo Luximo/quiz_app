@@ -1,0 +1,22 @@
+<h1>Quizzes#index</h1>
+<p>Find me in app/views/quizzes/index.html.erb</p>
+<div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+<label class="switch">
+  <input type="checkbox" id="mode-toggle">
+  <span class="slider round"></span>
+</label>
+
+<% @quizzes.each_with_index do |quiz, quiz_index| %>
+  <div class="question">
+    <p><%= quiz.question %></p>
+    <% JSON.parse(quiz.options).each_with_index do |option, index| %>
+      <!-- Place the input before the label -->
+      <input type="radio" id="answer_<%= quiz_index %>_<%= index %>" name="answer_<%= quiz.id %>" value="<%= index %>" data-correct-answer="<%= quiz.correct_answer %>">
+      <label for="answer_<%= quiz_index %>_<%= index %>"><%= option %></label>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+<button id="submit-quiz">Submit Quiz</button>
